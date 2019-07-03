@@ -1,0 +1,32 @@
+
+<form [formGroup]="myForm">
+
+    <mat-form-field>
+        <mat-select multiple  formControlName="drp" (selectionChange)="addForm()" placeholder="Select a Option">
+            <mat-option *ngFor="let data of dataValues" [value]="data" (selectionChange)="add($event.target.value)">
+               {{data}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    
+    <div formArrayName="details">
+        <mat-card *ngIf="show">
+            <div *ngFor="let newData of detailsData.controls; let i=index" [formGroupName]="i">    
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Enter Name" formControlName="name">
+                </mat-form-field>
+                
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Enter Mobile Number" formControlName="mobile">
+                </mat-form-field>
+                
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Enter Email" formControlName="email">
+                </mat-form-field>
+                <button mat-raised-button color="warn" (click)="deletePhone()">Delete</button>  
+                </div>
+        </mat-card>
+        
+    </div>  
+
+</form>
