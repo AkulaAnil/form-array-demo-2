@@ -1,17 +1,16 @@
-
 <form [formGroup]="myForm">
 
     <mat-form-field>
-        <mat-select multiple  formControlName="drp" (selectionChange)="addForm()" placeholder="Select a Option">
-            <mat-option *ngFor="let data of dataValues" [value]="data" (selectionChange)="add($event.target.value)">
+        <mat-select multiple  formControlName="drp" (selectionChange)="addForm($event.value)" placeholder="Select a Option">
+            <mat-option *ngFor="let data of dataValues" [value]="data">
                {{data}}
             </mat-option>
         </mat-select>
     </mat-form-field>
     
-    <div formArrayName="details">
-        <mat-card *ngIf="show">
-            <div *ngFor="let newData of detailsData.controls; let i=index" [formGroupName]="i">    
+    <div formArrayName="details"  *ngFor="let newData of detailsData.controls; let i=index">
+        <mat-card>
+            <div  [formGroupName]="i">    
                 <mat-form-field class="full-width">
                     <input matInput placeholder="Enter Name" formControlName="name">
                 </mat-form-field>
@@ -22,11 +21,9 @@
                 
                 <mat-form-field class="full-width">
                     <input matInput placeholder="Enter Email" formControlName="email">
-                </mat-form-field>
-                <button mat-raised-button color="warn" (click)="deletePhone()">Delete</button>  
-                </div>
+                </mat-form-field> <br><br>
+            </div> 
         </mat-card>
-        
     </div>  
 
 </form>
